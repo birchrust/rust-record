@@ -1,15 +1,15 @@
-mod fn_t;
+use std::ops::Add;
+use std::time::Duration;
 
 fn main() {
-    // 变量解构
-    let (a, b) = (10, 20);
+    let floats = add(1.2, 1.2);
+    let ints = add(10, 20);
 
-    let res = add_with_lifetimes(&a, &b);
-    println!("结果:{}", res);
+    let duration = add(Duration::new(5, 0), Duration::new(10, 0));
+
+    println!("{:?} {} {}", duration, floats, ints);
 }
 
-//  生命周期
-fn add_with_lifetimes<'a, 'b>(i: &'a i32, j: &'b i32) -> i32 {
-    // 解引用，返回 i+j
-    *i + *j
+fn add<T: Add<Output = T>>(i: T, j: T) -> T {
+    i + j
 }
